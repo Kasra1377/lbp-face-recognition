@@ -1,0 +1,7 @@
+scipy==1.4.1
+sklearn==0.22.2.post1
+cv2==4.1.2
+imutils==0.5.4
+numpy==1.19.5
+matplotlib==3.2.2
+skimage==0.16.2
