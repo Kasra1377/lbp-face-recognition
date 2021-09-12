@@ -26,17 +26,70 @@ We have various methods to detect and extract face(s) in the image, some of them
 
 ### 🔄Local Binary Patterns Process
 ---
-Local Binary Patterns or `LBP` in short, are a texture descriptor. LBPs compute a local representation of texture. This local representation is constructed by comparing each pixel with its surrounding neighborhood of pixels.
+Local Binary Patterns or `LBP` in short, is a texture descriptor. LBPs compute a local representation of texture. This local representation is constructed by comparing each pixel with its surrounding neighborhood of pixels.
 
 To implement LBP text descriptor, first we have to convert input image into a gray scale image, then for each pixel we consider a neighborhood of size `r` surrounding the center pixel.
 
-To calculate LBP for the neighborhood pixels, first we have to consider their values with compare to the center pixel value. if the intensity valueof the neighborhood pixel is equal to or greater than the intensity value of the center pixel, then we set the neighborhood pixel value to `1`; Otherwise we set it to `0`.
+To calculate LBP for the neighborhood pixels, first we have to consider their values with compare to the center pixel value. If the intensity value of the neighborhood pixel is equal to or greater than the intensity value of the center pixel, then we set the neighborhood pixel value to `1`; Otherwise we set it to `0`.
 
-To implement,we can start by any neighborhood pixels. We can choose neighborhood pixels with clock-wise order or vice versa. Keep in mind that, you have to keep the same order for every image ROI and every image in dataset.
+<p align="center">
+  <img width="400" src="imgs/img-1.png">
+</p>
 
-After calculating the neighborhood pixel values in terms of the center pixel, we have to perform a binary test. The results of the binary tests will be saved in an 8-bit array(for `3x3` neighborhood) and then we convert these array values into decimal format. After calculating the sum of decimals, we replace this value with the center pixel intensity value. After doing this process and computing the sum of decimals and replacing it with center pixel for all of the pixels in the image; we can get the LBP output image.This picture down below shows the final image after converting it into LBP format.The histogram next to it shows the intensity values distribution for all of the available pixels in the image.
+To implement, we can start by any neighborhood pixels. We can choose neighborhood pixels with `clock-wise` order or vice versa. Keep in mind that, you have to keep the same order for every image ROI and every image in dataset.
+
+<p align="center">
+  <img width="400" src="imgs/img-2.png">
+</p>
+
+After calculating the neighborhood pixel values in terms of the center pixel, we have to perform a binary test. The results of the binary tests will be saved in an 8-bit array(for `3x3` neighborhood) and then we convert these array values into decimal format. After calculating the sum of decimals, we replace this value with the center pixel intensity value. After doing this process and computing the sum of decimals and replacing it with center pixel for all of the pixels in the image; we can get the LBP output image.
+
+<p align="center">
+  <img width="400" src="imgs/img-3.png">
+</p>
+
+This picture down below shows the final image after converting it into LBP format. The histogram next to it shows the intensity value distribution for all of the available pixels in the image.
 
 <p>
   <img width="400" src="output/extraction-results/extracted-face.png">
   <img src="output/extraction-results/image-hist.PNG" width="400" />
 </p>
+
+LBP algorithm, instead of looking into the entire image, it first divide the whole image into a `SxS` grid. Then this algorithm convert each grid into the `LBP` format and obtain the intensity distribution of that particular grid. After doing this process, this model produces `S^2` histogram. After doing that, the model concatnate all of the produced histograms. Then we perform `KNN` algorithm (with `K=1`) and by \chi^{2} distance we find the closest face in the dataset and display the corresponding person name in the output.
+
+<p align="center">
+  <img width="400" src="imgs/img-4.png">
+</p>
+
+### 📐Model Performance
+---
+
+### 💻Installation
+---
+The Code is written in Python 3.7.5. If you don't have Python installed you can find it [here](https://www.python.org/downloads/). If you are using a lower version of Python you can upgrade using the pip package, ensuring you have the latest version of pip. To install the required packages and libraries, run this command in the project directory after cloning the repository:
+```
+git clone git@github.com:Kasra1377/flight-fare-prediction.git
+```
+or
+```
+git clone https://github.com/Kasra1377/flight-fare-prediction.git
+```
+To install required libraries just type:
+```
+pip install -r requirements.txt
+```
+
+### ⚙Technologies Used
+---
+![](https://forthebadge.com/images/badges/made-with-python.svg)
+
+[<img target="_blank" src="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" width=200>](https://scikit-learn.org/stable/) [<img target="_blank" src="https://numpy.org/images/logos/numpy.svg" width=200>](https://numpy.org/) [<img target="_blank" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/OpenCV_Logo_with_text.png/487px-OpenCV_Logo_with_text.png" width=200>](https://docs.opencv.org/) 
+
+### ❌Bugs & Issues
+---
+If you ever encountered any bugs in this projects or any technical issues you can report it by `issues` section of this repository or you can contact me by my email address. 
+
+
+### 👥Contributers
+---
+Kasra1377
